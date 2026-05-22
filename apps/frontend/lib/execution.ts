@@ -1,51 +1,37 @@
-export type ExecutionStep =
-    {
-        id: number;
+export type ExecutionStep = {
+  label: string;
 
-        name: string;
+  status: "pending" | "running" | "completed";
+};
 
-        status:
-        | "pending"
-        | "running"
-        | "completed";
-    };
+export const defaultSteps: ExecutionStep[] = [
+  {
+    label: "Resolve Tool",
+    status: "pending",
+  },
 
-export const defaultSteps:
-    ExecutionStep[] =
-    [
-        {
-            id: 1,
-            name: "Resolve Tool",
-            status: "pending"
-        },
+  {
+    label: "Extract Parameters",
+    status: "pending",
+  },
 
-        {
-            id: 2,
-            name: "Extract Parameters",
-            status: "pending"
-        },
+  {
+    label: "Validate",
+    status: "pending",
+  },
 
-        {
-            id: 3,
-            name: "Validate",
-            status: "pending"
-        },
+  {
+    label: "Apply Policy",
+    status: "pending",
+  },
 
-        {
-            id: 4,
-            name: "Apply Policy",
-            status: "pending"
-        },
+  {
+    label: "Execute",
+    status: "pending",
+  },
 
-        {
-            id: 5,
-            name: "Execute",
-            status: "pending"
-        },
-
-        {
-            id: 6,
-            name: "Respond",
-            status: "pending"
-        }
-    ];
+  {
+    label: "Respond",
+    status: "pending",
+  },
+];

@@ -1,54 +1,33 @@
-"use client";
-
-import { ExecutionStep }
-    from "@/lib/execution";
-
-export default function ExecutionTimeline(
-    {
-        steps
-    }:
-        {
-            steps:
-            ExecutionStep[]
-        }) {
-    return (
+export default function ExecutionTimeline({ steps }: { steps: any[] }) {
+  return (
+    <div
+      className="
+border
+rounded-3xl
+p-6
+space-y-4
+"
+    >
+      {steps.map((step, index) => (
         <div
-            className="
-            border
-            rounded-xl
-            p-6
-            space-y-4">
-            {
-                steps.map(
-                    step => (
-                        <div
-                            key={step.id}
-                            className="
-                            flex
-                            justify-between">
+          key={index}
+          className="
+flex
+justify-between
+items-center
+"
+        >
+          <div>{step.label}</div>
 
-                            <span>
-
-                                {
-                                    step.name
-                                }
-
-                            </span>
-
-                            <span>
-
-                                {
-                                    step.status === "completed"
-                                        ? "✓"
-                                        : step.status === "running"
-                                            ? "…"
-                                            : "○"
-                                }
-
-                            </span>
-                        </div>
-                    ))
-            }
+          <div>
+            {step.status === "completed"
+              ? "✓"
+              : step.status === "running"
+                ? "●"
+                : "○"}
+          </div>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
