@@ -1,56 +1,92 @@
+"use client";
+
+import { useState } from "react";
+
 import { Tool } from "@/scenarios/tools";
 
 export default function ToolCatalog({ tools }: { tools: Tool[] }) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div
       className="
-space-y-3
+border
+rounded-3xl
+p-5
+space-y-5
 "
     >
-      <div
+      <button
+        onClick={() => setExpanded(!expanded)}
         className="
+w-full
+flex
+justify-between
+items-center
+"
+      >
+        <div>
+          <div
+            className="
 text-sm
 text-neutral-500
 "
-      >
-        Available Tools
-      </div>
+          >
+            MCP
+          </div>
 
-      <div
-        className="
+          <div
+            className="
+text-xl
+"
+          >
+            Available Tools
+          </div>
+        </div>
+
+        <div
+          className="
+text-neutral-500
+"
+        >
+          {expanded ? "▲" : "▼"}
+        </div>
+      </button>
+
+      {expanded && (
+        <div
+          className="
 grid
 grid-cols-2
 gap-3
 "
-      >
-        {tools.map((tool) => (
-          <div
-            key={tool.name}
-            className="
+        >
+          {tools.map((tool) => (
+            <div
+              key={tool.name}
+              className="
 border
 rounded-2xl
 p-4
 space-y-3
-hover:border-white
-transition
-"
-          >
-            <div
-              className="
-flex
-justify-between
 "
             >
               <div
                 className="
-font-medium
+flex
+justify-between
 "
               >
-                {tool.name}
-              </div>
+                <div
+                  className="
+font-medium
+"
+                >
+                  {tool.name}
+                </div>
 
-              <div
-                className={`
+                <div
+                  className={`
 text-xs
 px-2
 py-1
@@ -58,45 +94,46 @@ rounded-full
 
 ${tool.type === "READ" ? "border" : "bg-white text-black"}
 `}
-              >
-                {tool.type}
+                >
+                  {tool.type}
+                </div>
               </div>
-            </div>
 
-            <div
-              className="
+              <div
+                className="
 text-sm
 text-neutral-500
 "
-            >
-              {tool.description}
-            </div>
+              >
+                {tool.description}
+              </div>
 
-            <div
-              className="
+              <div
+                className="
 flex
 gap-2
 flex-wrap
 "
-            >
-              {tool.parameters.map((p) => (
-                <div
-                  key={p}
-                  className="
+              >
+                {tool.parameters.map((p) => (
+                  <div
+                    key={p}
+                    className="
 text-xs
 border
 rounded-full
 px-2
 py-1
 "
-                >
-                  {p}
-                </div>
-              ))}
+                  >
+                    {p}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

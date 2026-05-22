@@ -121,8 +121,9 @@ font-bold
 mb-8
 "
       >
-        GatewayOps Support Playground
+        GatewayOps Playground
       </h1>
+      
 
       <div
         className="
@@ -264,7 +265,7 @@ text-sm
 text-neutral-500
 "
             >
-              Prebuilt Operational Workflows
+              Try Example Workflows
             </div>
 
             <div
