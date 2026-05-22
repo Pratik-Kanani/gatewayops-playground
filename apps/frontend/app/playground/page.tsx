@@ -1,57 +1,117 @@
-const scenarios = [
-    {
-        id: 1,
-        title: "Payment Failure"
-    },
-    {
-        id: 2,
-        title: "Payment Link"
-    },
-    {
-        id: 3,
-        title: "Approval Workflow"
-    },
-    {
-        id: 4,
-        title: "Rate Limiting"
-    }
-];
+"use client";
+
+import {
+    useState
+}
+    from "react";
+
+import ExecutionTimeline
+    from "@/components/playground/ExecutionTimeline";
+
+import {
+    defaultSteps
+}
+    from "@/lib/execution";
 
 export default function Playground() {
+    const [
+        steps,
+        setSteps
+    ]
+        =
+        useState(
+            []
+        );
+
+    async function runScenario() {
+        const copy =
+            structuredClone(
+                defaultSteps
+            );
+
+        setSteps(
+            copy
+        );
+
+        for (
+            let i = 0;
+            i <
+            copy.length;
+            i++
+        ) {
+            copy[i].status =
+                "running";
+
+            setSteps(
+                [...copy]
+            );
+
+            await new Promise(
+                r =>
+                    setTimeout(
+                        r,
+                        700
+                    )
+            );
+
+            copy[i].status =
+                "completed";
+
+            setSteps(
+                [...copy]
+            );
+        }
+    }
+
     return (
 
-        <main className="p-10">
+        <main
+            className="
+max-w-6xl
+mx-auto
+p-10
+"
+        >
 
-            <h1 className="text-5xl font-bold">
+            <h1
+                className="
+text-5xl
+font-bold
+"
+            >
+
                 Playground
+
             </h1>
 
-            <p className="mt-3 text-neutral-500">
-                Choose a scenario
-            </p>
-
-            <div className="grid grid-cols-2 gap-6 mt-10">
-
-                {
-                    scenarios.map(s => (
-                        <div
-                            key={s.id}
-                            className=" 
-                            border
-                            rounded-xl
-                            p-6
-                            cursor-pointer
-                            hover:scale-[1.02]
-                            transition"
-                        >
-
-                            <h2 className="text-xl font-semibold">
-                                {s.title}
-                            </h2>
-
-                        </div>
-                    ))
+            <button
+                onClick={
+                    runScenario
                 }
+                className="
+mt-8
+border
+rounded
+px-6
+py-3
+"
+            >
+
+                Run Scenario
+
+            </button>
+
+            <div
+                className="
+mt-10
+"
+            >
+
+                <ExecutionTimeline
+                    steps={
+                        steps
+                    }
+                />
 
             </div>
 
